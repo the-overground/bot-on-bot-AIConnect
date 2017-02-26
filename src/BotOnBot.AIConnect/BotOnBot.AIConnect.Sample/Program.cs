@@ -24,12 +24,15 @@ namespace BotOnBot.AIConnect.Sample
             var api = new Api();
             var client = await api.Connect(IPAddress.Loopback);
 
-            Console.WriteLine("I connected to the server!");
+            Console.WriteLine("I connected to the server! Sending start information");
+
+            await client.SendStartInformation("Sample.ai", "me irl");
+
+            Console.WriteLine("Sent start information!");
 
             var gameSessionData = await client.ReadNextMessage();
 
             Console.WriteLine("I received the game session data!");
-            Console.WriteLine(gameSessionData);
 
             _running = false;
         }
