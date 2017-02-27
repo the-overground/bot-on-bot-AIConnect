@@ -21,18 +21,13 @@ namespace BotOnBot.BotConnect.Sample
 
         private static async Task Connect()
         {
-            var api = new Api();
-            var client = await api.Connect(IPAddress.Loopback);
+            Console.WriteLine("I will now connect to the server and send start information!");
+            var client = await Api.Connect(IPAddress.Loopback, "Sample.bot", "bot irl");
 
-            Console.WriteLine("I connected to the server! Sending start information");
-
-            await client.SendStartInformation("Sample.bot", "bot irl");
-
-            Console.WriteLine("Sent start information!");
-
-            var gameSessionData = await client.ReadNextMessage();
-
-            Console.WriteLine("I received the game session data!");
+            Console.WriteLine("I connected to the server!");
+            
+            var response = await client.ReadNextMessage();
+            Console.WriteLine($"I received a response! The type was {response.Type.ToString()}. Owww :S");
 
             _running = false;
         }

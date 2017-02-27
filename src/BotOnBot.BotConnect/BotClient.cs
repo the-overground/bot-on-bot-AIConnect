@@ -18,14 +18,21 @@ namespace BotOnBot.BotConnect
         /// <summary>
         /// Reads and returns the next message from the game server.
         /// </summary>
-        public async Task<string> ReadNextMessage()
+        public async Task<ServerMessage> ReadNextMessage()
         {
             var result = string.Empty;
             using (var sr = StreamFactory.CreateReader(_client.GetStream()))
             {
                 result = await sr.ReadLineAsync();
             }
-            return result;
+
+            var type = ServerMessageType.Content;
+            if (result == "REJECTED")
+                type = ServerMessageType.Rejected;
+            else if (result == "DISCONNECTED")
+                type = ServerMessageType.Disconnected;
+
+            return new ServerMessage(result, type);
         }
 
         /// <summary>
@@ -39,17 +46,9 @@ namespace BotOnBot.BotConnect
             }
         }
 
-        public async Task SendStartInformation(string name, string author)
+        internal async Task SendStartInformation(string name, string author)
         {
             await SendMessage($"{{\"name\":\"{name}\",\"author\":\"{author}\"}}");
-        }
-
-        /// <summary>
-        /// Closes the connection to the game server.
-        /// </summary>
-        public void Disconnect()
-        {
-            _client.Client.Shutdown(SocketShutdown.Both);
         }
     }
 }

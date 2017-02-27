@@ -5,18 +5,24 @@ using System.Threading.Tasks;
 
 namespace BotOnBot.BotConnect
 {
-    public sealed class Api
+    public static class Api
     {
-        private const int AI_PORT = 1337;
+        private const int BOT_PORT = 1337;
 
-        public async Task<BotClient> Connect(IPAddress address)
+        /// <summary>
+        /// Connects the bot to the server and sends its welcome message.
+        /// </summary>
+        public static async Task<BotClient> Connect(IPAddress destinationAddress, string name, string author)
         {
-            Console.WriteLine($"(AIConnect) Attempting to connect to {address.ToString()}...");
+            Console.WriteLine($"(BotConnect) Attempting to connect to {destinationAddress.ToString()}...");
 
             var client = new TcpClient(AddressFamily.InterNetwork);
-            await client.ConnectAsync(address, AI_PORT);
+            await client.ConnectAsync(destinationAddress, BOT_PORT);
 
-            return new BotClient(client);
+            var botClient = new BotClient(client);
+            await botClient.SendStartInformation(name, author);
+
+            return botClient;
         }
     }
 }
