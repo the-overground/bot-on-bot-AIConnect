@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BotOnBot.AIConnect\BotOnBot.AIConnect.csproj" />
+    <ProjectReference Include="..\BotOnBot.BotConnect\BotOnBot.BotConnect.csproj" />
   </ItemGroup>
 
 </Project>

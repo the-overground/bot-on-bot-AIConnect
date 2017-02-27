@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace BotOnBot.AIConnect
+namespace BotOnBot.BotConnect
 {
     internal static class StreamFactory
     {

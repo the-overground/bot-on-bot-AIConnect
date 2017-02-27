@@ -1,16 +1,16 @@
 ﻿using System.Net.Sockets;
 using System.Threading.Tasks;
 
-namespace BotOnBot.AIConnect
+namespace BotOnBot.BotConnect
 {
     /// <summary>
-    /// Connects your AI to the game server.
+    /// Connects your Bot to the game server.
     /// </summary>
-    public sealed class AIClient
+    public sealed class BotClient
     {
         private readonly TcpClient _client;
 
-        internal AIClient(TcpClient client)
+        internal BotClient(TcpClient client)
         {
             _client = client;
         }

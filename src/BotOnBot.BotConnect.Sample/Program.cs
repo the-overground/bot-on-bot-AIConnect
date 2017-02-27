@@ -3,7 +3,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BotOnBot.AIConnect.Sample
+namespace BotOnBot.BotConnect.Sample
 {
     internal static class Program
     {
@@ -26,7 +26,7 @@ namespace BotOnBot.AIConnect.Sample
 
             Console.WriteLine("I connected to the server! Sending start information");
 
-            await client.SendStartInformation("Sample.ai", "me irl");
+            await client.SendStartInformation("Sample.bot", "bot irl");
 
             Console.WriteLine("Sent start information!");
 
