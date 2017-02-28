@@ -8,7 +8,7 @@ namespace BotOnBot.BotConnect.Sample
     internal static class Program
     {
         private static bool _running = true;
-
+        
         internal static void Main(string[] args)
         {
             Task.Run(() => Connect());
@@ -27,8 +27,8 @@ namespace BotOnBot.BotConnect.Sample
             Console.WriteLine("I connected to the server!");
             
             var response = await client.ReadNextMessage();
-            Console.WriteLine($"I received a response! The type was {response.Type.ToString()}. Owww :S");
-
+            Console.WriteLine($"I received a response! {response.Message}.");
+            
             _running = false;
         }
     }

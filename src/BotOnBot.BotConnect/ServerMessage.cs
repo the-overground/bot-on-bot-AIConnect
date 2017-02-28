@@ -3,12 +3,12 @@
     public struct ServerMessage
     {
         public readonly string Message;
-        public readonly ServerMessageType Type;
+        public readonly string Status;
 
-        internal ServerMessage(string message, ServerMessageType type)
+        internal ServerMessage(string message, string status)
         {
             Message = message;
-            Type = type;
+            Status = status;
         }
     }
 }

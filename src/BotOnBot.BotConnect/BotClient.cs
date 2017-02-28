@@ -1,5 +1,6 @@
 ﻿using System.Net.Sockets;
 using System.Threading.Tasks;
+using BotOnBot.Backend.DataModel;
 
 namespace BotOnBot.BotConnect
 {
@@ -26,13 +27,11 @@ namespace BotOnBot.BotConnect
                 result = await sr.ReadLineAsync();
             }
 
-            var type = ServerMessageType.Content;
-            if (result == "REJECTED")
-                type = ServerMessageType.Rejected;
-            else if (result == "DISCONNECTED")
-                type = ServerMessageType.Disconnected;
+            var parsed = Serializer.Deserialize<NetworkResponseModel>(result);
+            if (!EnumParser.TryParse<ResponseStatusType>(parsed.ResponseStatus, out var status))
+                status = ResponseStatusType.Invalid;
 
-            return new ServerMessage(result, type);
+            return new ServerMessage(result, status.ToString());
         }
 
         /// <summary>
